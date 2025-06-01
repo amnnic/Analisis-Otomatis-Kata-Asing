@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Analisis Otomatis Kata Asing</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+    h1 {
+      text-align: center;
+      color: #343a40;
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ced4da;
+      border-radius: 5px;
+      resize: vertical;
+    }
+    button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #hasil {
+      margin-top: 20px;
+      padding: 15px;
+      background: #e9ecef;
+      border-radius: 5px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Analisis Otomatis Kata Asing</h1>
+    <label for="inputTeks">Masukkan teks untuk dianalisis:</label>
+    <textarea id="inputTeks" placeholder="Contoh: Saya pergi ke supermarket untuk membeli shampoo dan cereal."></textarea>
+    <button onclick="analisisKataAsing()">Analisis</button>
+    <div id="hasil"></div>
+  </div>
+
+  <script>
+    const daftarKataAsing = ["supermarket", "shampoo", "cereal", "internet", "software", "download"]; // Contoh
+
+    function analisisKataAsing() {
+      const teks = document.getElementById("inputTeks").value.toLowerCase();
+      const kataDalamTeks = teks.match(/\b\w+\b/g) || [];
+      const kataAsingDitemukan = kataDalamTeks.filter(kata => daftarKataAsing.includes(kata));
+      const hasil = kataAsingDitemukan.length > 0 
+        ? "Kata asing ditemukan:\n- " + [...new Set(kataAsingDitemukan)].join("\n- ")
+        : "Tidak ditemukan kata asing.";
+      document.getElementById("hasil").innerText = hasil;
+    }
+  </script>
+</body>
+</html>
